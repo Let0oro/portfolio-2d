@@ -1,4 +1,6 @@
 import { timer } from './src/utils/getTime'
+import {templateWL} from "./src/components/WindowLoved/WindowLoved";
+import "./src/utils/notebook";
 import './style.css'
 
 
@@ -10,6 +12,6 @@ document.body.innerHTML = `
 <p><b>I love to...</b></p>
 `;
 
-import "./src/utils/notebook";
 
 timer();
+templateWL();
