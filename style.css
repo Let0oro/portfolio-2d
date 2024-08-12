@@ -17,11 +17,11 @@ body
 {
   background-color: transparent;
   color: #242424;
-  height: 100lvh;
-  cursor: none;
+  height: 200lvh;
   overflow: hidden;
   padding: 0;
   border: 0;
+  cursor: none;
 }
 
 body > * 
@@ -35,7 +35,9 @@ body > *
 canvas
 {
   width: 100%;
+  height: 200lvh;
   display: block;
+  filter: contrast(4);
 }
 
 #notebook 
@@ -45,6 +47,24 @@ canvas
   left: 0;
   z-index: -1;
   display: block;
-  height: 100%;
+  height: 200lvh;
+  background-color: #FFFFFF;
   width: 100%;
+}
+
+#date 
+{
+  text-align: end;
+}
+
+.totop 
+{
+  display: block;
+  left: 10%;
+  right: 0;
+  width: max-content;
+  position: absolute;
+  padding: .4rem .8rem;
+  margin: 0 auto;
+  top: 110lvh;
 }

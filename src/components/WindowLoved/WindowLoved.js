@@ -1,4 +1,5 @@
 import indexLoved from "../../data";
+import "./style.css";
 
 const windowsLoved = Array.from({ length: indexLoved.length }, (_, i) => indexLoved[i]);
 const templateLC = (tagObj) => `
@@ -22,6 +23,7 @@ export const templateWL = () => {
 
     const finalTemplate = loved.join("");
     const section = document.createElement("section");
+    section.className = "loved"
     section.innerHTML = finalTemplate
 
     document.body.append(section);
