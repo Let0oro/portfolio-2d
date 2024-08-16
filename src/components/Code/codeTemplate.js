@@ -6,7 +6,7 @@ import { flipPaper } from "../../utils/flipPaper";
 const pageContent = (title, subtitle, description, logo, time, extra) => `
 <div class="page text-page">
     <h4><div><img src="${logo}" alt="${title} logo" /></div>${title}</h4>
-    <h5>${subtitle}</h5> - <span>${time}</span>
+    <h5>${subtitle}</h5> <span>(${time})</span>
     <p>Description: ${description}</p>
     <p>${extra.join(" | ")}</p>
 </div>
@@ -50,6 +50,7 @@ const codeTemplate = () => {
     const xpBook = genBook("xp");
     const pjBook = genBook("pj");
     return `
+    <h4>Coding!</h4>
     <article class="bookset" >
     ${pjBook}
     ${xpBook}

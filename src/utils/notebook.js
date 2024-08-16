@@ -1,31 +1,31 @@
-let canvas;
-let img, imgback;
-let r, g, b;
+import feather from '../../public/assets/images/pluma.png';
+let canvas, img, imgback;
 
-const TOTAL = 5;
+const TOTAL = 8;
 let points = [];
-let angle = 0;
 
 function windowResized() {
-	resizeCanvas(windowWidth, windowHeight * 2);
+	resizeCanvas(windowWidth, document.body.clientHeight);
 }
 
 function preload() {
-	img = loadImage('../../public/assets/images/pluma.png');
-	imgback = loadImage('../../public/assets/images/pluma.png');
+	img = loadImage(feather);
+	imgback = loadImage(feather);
 }
 
 function setup() {
-	canvas = createCanvas(windowHeight * 2, windowWidth);
+	canvas = createCanvas(document.body.clientHeight, windowWidth);
 	canvas.position(0, 0);
 	canvas.parent("notebook");
 	smooth();
-	resizeCanvas(windowWidth, windowHeight * 2);
-	canvas.background(100);
+	resizeCanvas(windowWidth, document.body.clientHeight);
+	// canvas.background(100);
 	noStroke();
 
-	img.resize(40, 79.4);
-	imgback.resize(44, 83.4);
+	angleMode(DEGREES);
+
+	img.resize(20, 79.4 * 1.5);
+	imgback.resize(23, 83.4 * 1.5);
 	img.filter(INVERT);
 
 	for (var i = 0; i < TOTAL; i++) {
@@ -40,32 +40,45 @@ function setup() {
 
 function draw() {
 	canvas.background(220);
+	console.log({bodyH: document.body.clientHeight});
+	console.log({windowHeight});
 
 	drawRects();
-	drawLines();
-	drawCircles();
+	if (windowWidth > 780) {
+		drawFeather();
+		drawInk();
+	}
 }
 
 function drawRects() {
-	const size = 16 * 2;
-	const totalHLines = Math.ceil(windowHeight * 2 / size);
+	const size = 16 * (1 + (windowWidth > 780));
+	const totalHLines = Math.ceil(document.body.clientHeight / size);
 
 	strokeWeight(.5);
-	line(windowWidth * 0.10, 0, windowWidth * 0.10, windowHeight * 2)
+	stroke(color(255, 0, 0));
+	line(windowWidth * 0.1, 0, windowWidth * 0.1, document.body.clientHeight)
+	stroke(0);
 	for (let i = 1; i < totalHLines; i++) {
 		line(0, i * size, windowWidth, i * size)
 	}
 }
 
-function drawLines() {
+function drawFeather() {
 
-	// Display the image.
-	image(imgback, mouseX - 2, mouseY - 81.4);
-	image(img, mouseX, mouseY - 79.4);
+	push();
+
+	translate(mouseX, mouseY);
+	rotate(30);
+
+	image(imgback, 0 - 1.5, 0 - 81.4 * 1.5);
+	image(img, 0, 0 - 79.4 * 1.5);
+	rotate(0);
+
+	pop();
 	
 }
 
-function drawCircles() {
+function drawInk() {
 	var time = millis() / 1000;
 	for (let i = 0; i < TOTAL; i++) {
 		const point = points[i];
@@ -73,18 +86,15 @@ function drawCircles() {
 		point.size *= 0.99 % time;
 		if (point.size < 1) {
 			point.size = random(1, 2.5);
-			point.pos.x = mouseX + random(-10, 10);
-			point.pos.y = mouseY + random(-10, 10);
+			point.pos.x = (mouseX != pmouseX) ? mouseX + random(-5, 5) : null;
+			point.pos.y = (mouseX != pmouseX) ? mouseY + random(-5, 5) : null;
 		}
 
 		strokeWeight(15 * noise(0.005 * frameCount + noise(0, 200)));
 		stroke(0)
 		fill(0)
-		// if ((point.pos.x > 20 && point.pos.y > 20 &&
-		// 	point.pos.x < windowWidth - 20 && point.pos.y < windowHeight * 2 - 20)
-		// ) {
-		circle(point.pos.x, point.pos.y, point.size * 2);
-		// }
+
+		if (point.pos.x && point.pos.y) circle(point.pos.x, point.pos.y, point.size * 2);
 	}
 }
 

@@ -10,11 +10,13 @@ document.body.innerHTML = `
 <h1 id="greeting" ></h1>
 <h3 id="date"></h3>
 <h3>Name: Juanma</h3>
-<p><b>I love to...</b></p>
-<button class="totop" >To Top</button>
+<h3>Country: Spain 🇪🇸</h3>
+<h3>Birth year: 2001</h3>
+<div class="me">
+<section class="loved" ></section>
 <section class="code__book"></section>
+</div>
 `;
-
 
 timer();
 templateWL();

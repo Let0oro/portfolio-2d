@@ -1,9 +1,9 @@
 export default [
-    {
-        name: "Games",
-        type: "video",
-        src: "../../../public/assets/video/game.mp4"
-    },
+    // {
+    //     name: "Games",
+    //     type: "video",
+    //     src: "../../../public/assets/video/game.mp4"
+    // },
     {
         name: "Read and Write",
         type: "video",
@@ -18,10 +18,5 @@ export default [
         name: "Animals",
         type: "img",
         src: "../../../public/assets/images/animals.jpg"
-    },
-    {
-        name: "Code",
-        type: "button",   
-        text: "Click here!"     
     },
 ]

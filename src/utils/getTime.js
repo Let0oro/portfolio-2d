@@ -1,6 +1,6 @@
 const getStaticTime = () => {
     const date = String(new Date(Date.now()));
-    const dateFormated = date.split(" ").slice(0, 5).join(" ");
+    const dateFormated = date.split(" ").slice(0, 5).join(" ").split(":").slice(0,2).join(":");
     const time = date.split(" ").find((item) => item.includes(":"));
     return {date, time, dateFormated};
 }
@@ -11,11 +11,14 @@ export const greet = () => {
     return greetings;
 }
 
+const setTime = () => {
+    const { dateFormated } = getStaticTime();
+    const greetings = greet();
+    document.querySelector("#greeting").innerHTML = greetings;
+    document.querySelector("#date").innerHTML = "Date: " + dateFormated;
+}
+
 export const timer = () => {
-    setInterval(() => {
-        const { dateFormated } = getStaticTime();
-        const greetings = greet();
-        document.querySelector("#greeting").innerHTML = greetings;
-        document.querySelector("#date").innerHTML = "Date: " + dateFormated;
-    }, 1000);
+    setTime();
+    setInterval(setTime, 1000 * 15);
 }

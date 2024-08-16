@@ -1,23 +1,39 @@
 .loved 
 {
-    margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    column-count: 2;
+    flex-direction: column;
     justify-content: space-around;
-    width: 100lvw;
+    max-width: 40lvw;
+    min-width: min-content;
     gap: 1rem 1%;
 }
 
 .loved__component 
 {
-    width: 23%;
+    max-width: 23%;
+    min-width: 12rem;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    position: relative;
+    margin: 0 auto;
+
+    & h4 
+    {
+        position: absolute;
+        z-index: 1000;
+        -webkit-text-stroke: 1.2px #121212;
+        color: #fff0;
+        transform: rotateZ(-45deg) translateX(-1rem) translateY(-1rem);
+        font-weight: bold;
+        text-shadow: 0 0 3px #fff;
+        font-size: 1.1rem
+        
+    }
 
     & img, video
     {
+        filter: grayscale(.85);
         border-radius: 16px;
         width: 100%;
         object-fit: cover;
@@ -36,8 +52,19 @@
     }
 }
 
-.loved__component:last-child
-{
-    justify-self: center;
-    padding: .4rem .8rem;
+#p_loved {
+    position: absolute;
+    left: 0;
+  
+    & b {
+      transform-origin: 0%;
+      display: block;
+      width: max-content;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transform: rotateZ(270deg) translateY(6lvw) translateX(-9rem);
+    }
 }
+
+
+@media screen and (min-width: 1024px) { .loved__component { margin: 0; }}

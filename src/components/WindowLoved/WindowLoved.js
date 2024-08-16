@@ -22,10 +22,7 @@ export const templateWL = () => {
     }
 
     const finalTemplate = loved.join("");
-    const section = document.createElement("section");
-    section.className = "loved"
-    section.innerHTML = finalTemplate
-
-    document.body.append(section);
+    const section = document.querySelector(".loved");
+    section.innerHTML = "<p id='p_loved' ><b>I love to...</b></p>" + finalTemplate
 
 }
