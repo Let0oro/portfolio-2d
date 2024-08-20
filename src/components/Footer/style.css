@@ -1,0 +1,31 @@
+footer {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 10%;
+  margin-top: 1.5rem;
+  padding-bottom: 0;
+
+  & h3 {
+    display: inline;
+  }
+}
+
+a {
+    color: #212121;
+    text-decoration: underline;
+    height: min-content;
+
+    & svg, img {
+      height: 75%;
+      width: 1rem;
+      vertical-align: sub;
+      margin-right: .3rem;
+  }
+}
+
+a:visited {
+    color: #aeaeae;
+    font-weight: 500;
+    text-decoration: none;
+} 

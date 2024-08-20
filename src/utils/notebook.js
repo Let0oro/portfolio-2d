@@ -1,7 +1,7 @@
 import feather from '../../public/assets/images/pluma.png';
 let canvas, img, imgback;
 
-const TOTAL = 8;
+const TOTAL = 200;
 let points = [];
 
 function windowResized() {
@@ -32,7 +32,8 @@ function setup() {
 		points.push({
 			pos: createVector(mouseX + noise(0, 30) - 15, mouseY + noise(0, 30) - 15),
 			dir: TWO_PI * noise(0.005 * frameCount),
-			size: noise(0.5, 8),
+			// size: noise(0.5, 8),
+			size: i * 100 / TOTAL,
 		});
 	}
 
@@ -40,8 +41,6 @@ function setup() {
 
 function draw() {
 	canvas.background(220);
-	console.log({bodyH: document.body.clientHeight});
-	console.log({windowHeight});
 
 	drawRects();
 	if (windowWidth > 780) {
@@ -86,11 +85,13 @@ function drawInk() {
 		point.size *= 0.99 % time;
 		if (point.size < 1) {
 			point.size = random(1, 2.5);
+			// point.size = 1.5;
 			point.pos.x = (mouseX != pmouseX) ? mouseX + random(-5, 5) : null;
 			point.pos.y = (mouseX != pmouseX) ? mouseY + random(-5, 5) : null;
 		}
 
-		strokeWeight(15 * noise(0.005 * frameCount + noise(0, 200)));
+		// strokeWeight(15 * noise(0.005 * frameCount + noise(0, 200)));
+		strokeWeight(1.5 * point.size);
 		stroke(0)
 		fill(0)
 
