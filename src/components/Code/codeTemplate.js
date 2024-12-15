@@ -3,20 +3,23 @@ import "./main.scss";
 import "../../utils/flipPaper";
 import { flipPaper } from "../../utils/flipPaper";
 
-const pageContent = (title, subtitle, description, logo, time, extra) => `
+const pageContent = (title, subtitle, description, logo, time, extra, link) => `
 <div class="page text-page">
     <h4><div><img src="${logo}" alt="${title} logo" /></div>${title}</h4>
     <h5>${subtitle}</h5> <span>(${time})</span>
     <p>Description: ${description}</p>
     <p>${extra.join(" | ")}</p>
-</div>
+    ${link ? `<a href="${link}" target="_blank">Visit -></a>
+    </div>
+    ` : `</div>`}
 `;
 
 const genBook = (tag) => {
 
     const content = data[tag];
-    const titleBook = {"xp": "Experience", "pj": "Studies"}[tag];
+    const titleBook = { "xp": "Experience", "pj": "Studies" }[tag];
 
+    console.log({ content })
     let arrContent = [];
     for (let i = 0; i < content.length; i++) {
         const ctn = content[i];
@@ -25,11 +28,12 @@ const genBook = (tag) => {
             subtitle: ctn.position || ctn.course,
             description: ctn.description,
             logo: ctn.logo,
-            time : ctn.time,
+            time: ctn.time,
             extra: ctn.experience || ctn.extra_knowledge,
+            link: ctn.link || ""
         };
-        const { title, subtitle, description, logo, time, extra } = parseObj;
-        arrContent.push(pageContent(title, subtitle, description, logo, time, extra));
+        const { title, subtitle, description, logo, time, extra, link } = parseObj;
+        arrContent.push(pageContent(title, subtitle, description, logo, time, extra, link));
     }
     if (content.length % 2) arrContent.push("<div class='page text-page'></div>");
 
@@ -65,14 +69,16 @@ export const templateCode = () => {
 
 window.addEventListener("load", () => {
     const books = document.querySelector(".bookset");
-    
+
+    console.log({ books })
+
     books.children.forEach(book => {
         const pages = book.querySelectorAll(`.page`);
         const movePage = flipPaper();
-        
+
         pages.forEach((page, i) => {
             const otherBook = [...books.children].find(bk => bk !== book);
-            page.addEventListener("click", ({target}) => {
+            page.addEventListener("click", ({ target }) => {
                 if (!book.classList.contains("selected")) book.classList.add("selected");
                 otherBook.classList.remove("selected");
                 [...otherBook.querySelectorAll(".page")].forEach(page => page.classList.remove("left-side"));

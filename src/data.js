@@ -1,9 +1,4 @@
 export default [
-    // {
-    //     name: "Games",
-    //     type: "video",
-    //     src: "../../../public/assets/video/game.mp4"
-    // },
     {
         name: "Read and Write",
         type: "video",
